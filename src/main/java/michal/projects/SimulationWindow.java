@@ -1,37 +1,48 @@
 package michal.projects;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SimulationWindow {
-    private int barWidth;
+    private List<Rectangle> list;
+
     public SimulationWindow(int numOfElements, int speed, SortingAlgorithm algorithm){
         Stage stage = new Stage();
 
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        double width = primaryScreenBounds.getWidth()/(double)numOfElements;
-        double maxHeight = primaryScreenBounds.getHeight();
+        double width = Utils.getMaxWidth()/(double)numOfElements;
+        double maxHeight = Utils.getMaxHeight();
 
-        GridPane root = new GridPane();
+        Pane root = new Pane();
 
         Random rand = new Random();
 
+        list = new ArrayList<>();
         for(int i = 0; i<numOfElements; i++){
-            int height = rand.nextInt((int)maxHeight) + 1;
-            Rectangle bar = new Rectangle(width, height);
-            bar.setFill(Color.BLACK);
-            root.add(bar, i, 0);
+            int height = rand.nextInt(30, (int)maxHeight);
+            Rectangle bar = new Rectangle(
+                i * width,                    // x position
+                maxHeight - height,           // y position (bottom of scene minus bar height)
+                width,                        // width
+                height                        // height
+            );
+
+            bar.setFill(Utils.getColorForHeight(height));
+            root.getChildren().add(bar);
+            list.add(bar);
         }
 
-        Scene scene = new Scene(root, 400, 400);
+        algorithm.setList(list);
+        algorithm.setSpeed(speed);
+
+        Thread thread = new Thread(algorithm);
+        thread.start();
+
+        Scene scene = new Scene(root, Utils.getMaxWidth(), Utils.getMaxHeight());
         stage.setScene(scene);
         stage.show();
     }

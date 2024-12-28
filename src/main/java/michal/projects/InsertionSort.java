@@ -1,17 +1,30 @@
 package michal.projects;
 
-public class InsertionSort implements SortingAlgorithm, Runnable {
+public class InsertionSort extends SortingAlgorithm{
 
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'run'");
-    }
-
-    @Override
-    public void sort(int[] arr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sort'");
+    public InsertionSort(){
+        super();
     }
     
+    @Override
+    public void run() {
+        int size = list.size();
+        try {
+            for(int j = 1; j < size; j++) {
+                double key = list.get(j).getHeight();
+                int i = j-1;
+                while (i >= 0 ) {
+                    if (list.get(i).getHeight() > key) {
+                        swap(i, i+1);
+                        Thread.sleep(speed);
+                    } else {
+                        break;
+                    }
+                    i--;
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -27,7 +27,7 @@ public class StartUpPanel {
         algorithmComboBox.setValue("insertion sort");
 
         Label speedLabel = new Label("speed");
-        Slider speedSlider = new Slider(20, 300, 100);
+        Slider speedSlider = new Slider(5, 1000, 100);
         speedSlider.setBlockIncrement(1);
 
         
