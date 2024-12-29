@@ -32,7 +32,10 @@ public class StartUpPanel {
 
         
         Button startButton = new Button("Start simulation");
-        startButton.setOnAction(event -> new SimulationWindow(elementsSpinner.getValue(), (int)speedSlider.getValue(), new InsertionSort()));
+        startButton.setOnAction(event -> new SimulationWindow(elementsSpinner.getValue(), 
+            (int)speedSlider.getValue(), 
+            AlgorithmMap.getInstance().getAlgorithm(algorithmComboBox.getValue()))
+        );
 
         // Layout configuration
         GridPane grid = new GridPane();

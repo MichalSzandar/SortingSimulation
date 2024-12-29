@@ -39,11 +39,12 @@ public class SimulationWindow {
         algorithm.setList(list);
         algorithm.setSpeed(speed);
 
-        Thread thread = new Thread(algorithm);
-        thread.start();
-
         Scene scene = new Scene(root, Utils.getMaxWidth(), Utils.getMaxHeight());
         stage.setScene(scene);
         stage.show();
+
+        Thread thread = new Thread(algorithm);
+        thread.setDaemon(true);
+        thread.start();
     }
 }
