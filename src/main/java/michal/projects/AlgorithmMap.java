@@ -10,6 +10,7 @@ public class AlgorithmMap {
         map = new HashMap<>();
         map.put("insertion sort", new InsertionSort());
         map.put("bubble sort", new BubbleSort());
+        map.put("quick sort", new QuickSort());
     }
 
     public static AlgorithmMap getInstance(){
