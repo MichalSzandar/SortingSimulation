@@ -9,9 +9,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public abstract class SortingAlgorithm implements Runnable {
+    /**list of rectangles to sort by their height */
     protected List<Rectangle> list;
-    protected int speed;
+    /**delay between swaping elements or setting new values measured in miliseconds*/
+    protected int delay;
 
+    /**default constructor, initializes list of rectangles */
     public SortingAlgorithm(){
         this.list = new ArrayList<>();
     }
@@ -21,10 +24,19 @@ public abstract class SortingAlgorithm implements Runnable {
         this.list = list;
     }
 
-    public void setSpeed(int speed){
-        this.speed = speed;
+    /**
+     * sets the delay between operations
+     * @param delay - miliseconds between operations 
+     */
+    public void setDelay(int delay){
+        this.delay = delay;
     }
 
+    /**
+     * swaps heights and colors of rectangles at i and j position
+     * @param i - index of the first element
+     * @param j - index of the second element
+     */
     protected void swap(int i, int j) {
         try {
             // Highlight the bars being swapped
@@ -33,7 +45,7 @@ public abstract class SortingAlgorithm implements Runnable {
                 list.get(j).setFill(Color.GRAY);
             });
     
-            Thread.sleep(speed); // Pause for visualization
+            Thread.sleep(delay); // Pause for visualization
     
             // Perform the swap
             double temp = list.get(i).getHeight();
@@ -42,17 +54,34 @@ public abstract class SortingAlgorithm implements Runnable {
                 list.get(j).setHeight(temp);
                 list.get(i).setY(Utils.getMaxHeight() - list.get(i).getHeight());
                 list.get(j).setY(Utils.getMaxHeight() - list.get(j).getHeight());
-            });
-    
-            Thread.sleep(speed); // Pause for visualization
-    
-            // Reset bar colors
-            waitForPlatformRunLater(() -> {
                 list.get(i).setFill(Utils.getColorForHeight(list.get(i).getHeight()));
                 list.get(j).setFill(Utils.getColorForHeight(list.get(j).getHeight()));
             });
     
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * sets height of Rectangle at i position to val
+     * @param i - index of rectangle 
+     * @param val - new height of rectangle
+     */
+    protected void setVal(int i, double val){
+        try {
+            waitForPlatformRunLater(() -> {
+                list.get(i).setFill(Color.GREY);
+            });
+
+            Thread.sleep(delay);
+
+            waitForPlatformRunLater(() -> {
+                list.get(i).setHeight(val);
+                list.get(i).setY(Utils.getMaxHeight() - list.get(i).getHeight());
+                list.get(i).setFill(Utils.getColorForHeight(list.get(i).getHeight()));
+            });
+        } catch (InterruptedException e){
             e.printStackTrace();
         }
     }

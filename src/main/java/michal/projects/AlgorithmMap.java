@@ -11,6 +11,7 @@ public class AlgorithmMap {
         map.put("insertion sort", new InsertionSort());
         map.put("bubble sort", new BubbleSort());
         map.put("quick sort", new QuickSort());
+        map.put("merge sort", new MergeSort());
     }
 
     public static AlgorithmMap getInstance(){

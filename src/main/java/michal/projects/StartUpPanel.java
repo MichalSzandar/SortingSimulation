@@ -19,21 +19,21 @@ public class StartUpPanel {
 
         Label numOfElements = new Label("Number of elements: ");
         Spinner<Integer> elementsSpinner = new Spinner<>();
-        elementsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 100, 10));
+        elementsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 300, 200));
 
         Label algorithmLabel = new Label("choose sorting algorithm: ");
         ComboBox<String> algorithmComboBox = new ComboBox<>();
         algorithmComboBox.getItems().addAll("bubble sort", "quick sort", "insertion sort", "merge sort");
         algorithmComboBox.setValue("insertion sort");
 
-        Label speedLabel = new Label("speed");
-        Slider speedSlider = new Slider(5, 1000, 100);
-        speedSlider.setBlockIncrement(1);
+        Label delayLabel = new Label("delay");
+        Slider delaySlider = new Slider(5, 1000, 100);
+        delaySlider.setBlockIncrement(1);
 
         
         Button startButton = new Button("Start simulation");
         startButton.setOnAction(event -> new SimulationWindow(elementsSpinner.getValue(), 
-            (int)speedSlider.getValue(), 
+            (int)delaySlider.getValue(), 
             AlgorithmMap.getInstance().getAlgorithm(algorithmComboBox.getValue()))
         );
 
@@ -48,8 +48,8 @@ public class StartUpPanel {
         grid.add(elementsSpinner, 1, 0);
         grid.add(algorithmLabel, 0, 1);
         grid.add(algorithmComboBox, 1, 1);
-        grid.add(speedLabel, 0, 2);
-        grid.add(speedSlider, 1, 2);
+        grid.add(delayLabel, 0, 2);
+        grid.add(delaySlider, 1, 2);
         grid.add(startButton, 0, 3);
 
         Scene scene = new Scene(grid, 400, 200);

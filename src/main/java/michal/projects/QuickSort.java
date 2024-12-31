@@ -2,7 +2,7 @@ package michal.projects;
 
 public class QuickSort extends SortingAlgorithm {
 
-    int partition(int low, int high)
+    private int partition(int low, int high)
     {
         double pivot = list.get(high).getHeight(); 
         int i = (low-1);
@@ -23,7 +23,7 @@ public class QuickSort extends SortingAlgorithm {
     }
 
 
-    void sort(int l, int h)
+    private void sort(int l, int h)
     {
         if (l < h)
         {

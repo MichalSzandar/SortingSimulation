@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class SimulationWindow {
     private List<Rectangle> list;
 
-    public SimulationWindow(int numOfElements, int speed, SortingAlgorithm algorithm){
+    public SimulationWindow(int numOfElements, int delay, SortingAlgorithm algorithm){
         Stage stage = new Stage();
 
         double width = Utils.getMaxWidth()/(double)numOfElements;
@@ -37,7 +37,7 @@ public class SimulationWindow {
         }
 
         algorithm.setList(list);
-        algorithm.setSpeed(speed);
+        algorithm.setDelay(delay);
 
         Scene scene = new Scene(root, Utils.getMaxWidth(), Utils.getMaxHeight());
         stage.setScene(scene);
