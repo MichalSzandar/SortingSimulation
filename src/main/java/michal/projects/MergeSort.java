@@ -31,6 +31,7 @@ public class MergeSort extends SortingAlgorithm {
         // Initial index of merged subarray array
         int k = l;
         while (i < n1 && j < n2) {
+            if(!isRunning) return;
             if (L[i] <= R[j]) {
                 setVal(k, L[i]);
                 i++;
@@ -44,6 +45,7 @@ public class MergeSort extends SortingAlgorithm {
 
         // Copy remaining elements of L[] if any
         while (i < n1) {
+            if(!isRunning) return;
             setVal(k, L[i]);
             i++;
             k++;
@@ -51,6 +53,7 @@ public class MergeSort extends SortingAlgorithm {
 
         // Copy remaining elements of R[] if any
         while (j < n2) {
+            if(!isRunning) return;
             setVal(k, R[j]);
             j++;
             k++;
@@ -64,6 +67,7 @@ public class MergeSort extends SortingAlgorithm {
      */
     private void sort(int l, int r)
     {
+        if(!isRunning) return;
         if (l < r) {
 
             // Find the middle point
@@ -80,6 +84,8 @@ public class MergeSort extends SortingAlgorithm {
 
     @Override
     public void run() {
+        isRunning = true;
+        
         sort(0, list.size()-1);
     }
     

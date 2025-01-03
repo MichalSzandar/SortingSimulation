@@ -8,8 +8,10 @@ public class QuickSort extends SortingAlgorithm {
         int i = (low-1);
         for (int j=low; j<high; j++)
         {
+            if(!isRunning) return -1;
             // If current element is smaller than or
             // equal to pivot
+            
             if (list.get(j).getHeight() <= pivot)
             {
                 i++;
@@ -25,9 +27,12 @@ public class QuickSort extends SortingAlgorithm {
 
     private void sort(int l, int h)
     {
+        if(!isRunning) return;
+        
         if (l < h)
         {
             int pi = partition(l, h);
+            if(pi<0) return;
 
             // Recursively sort elements before
             // partition and after partition
@@ -38,6 +43,7 @@ public class QuickSort extends SortingAlgorithm {
 
     @Override
     public void run() {
+        isRunning = true;
         sort(0, list.size()-1);
     }
     

@@ -41,6 +41,9 @@ public class SimulationWindow {
 
         Scene scene = new Scene(root, Utils.getMaxWidth(), Utils.getMaxHeight());
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            algorithm.stop();
+        });
         stage.show();
 
         Thread thread = new Thread(algorithm);

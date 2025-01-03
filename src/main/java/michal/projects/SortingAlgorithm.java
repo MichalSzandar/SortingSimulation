@@ -13,9 +13,16 @@ public abstract class SortingAlgorithm implements Runnable {
     protected List<Rectangle> list;
     /**delay between swaping elements or setting new values measured in miliseconds*/
     protected int delay;
+    /**defines if thread is supposedto still be running */
+    protected boolean isRunning;
+
+    public void stop(){
+        isRunning = false;
+    }
 
     /**default constructor, initializes list of rectangles */
     public SortingAlgorithm(){
+        isRunning = true;
         this.list = new ArrayList<>();
     }
 
