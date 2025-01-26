@@ -13,28 +13,35 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class StartUpPanel {
+    /**
+     * starts new main menu where user chooses
+     * parameters for the simulation.
+     * @param stage
+     */
     @SuppressWarnings("exports")
-    public StartUpPanel(Stage stage){
+    public StartUpPanel(final Stage stage) {
         stage.setTitle("control panel");
 
         Label numOfElements = new Label("Number of elements: ");
         Spinner<Integer> elementsSpinner = new Spinner<>();
-        elementsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 300, 200));
+        elementsSpinner.setValueFactory(
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 300, 200));
 
         Label algorithmLabel = new Label("choose sorting algorithm: ");
         ComboBox<String> algorithmComboBox = new ComboBox<>();
-        algorithmComboBox.getItems().addAll("bubble sort", "quick sort", "insertion sort", "merge sort");
+        algorithmComboBox.getItems().addAll(
+            "bubble sort", "quick sort", "insertion sort", "merge sort");
         algorithmComboBox.setValue("insertion sort");
 
         Label delayLabel = new Label("delay");
         Slider delaySlider = new Slider(5, 1000, 100);
         delaySlider.setBlockIncrement(1);
 
-        
         Button startButton = new Button("Start simulation");
-        startButton.setOnAction(event -> new SimulationWindow(elementsSpinner.getValue(), 
-            (int)delaySlider.getValue(), 
-            AlgorithmMap.getInstance().getAlgorithm(algorithmComboBox.getValue()))
+        startButton.setOnAction(event -> new SimulationWindow(
+            elementsSpinner.getValue(), (int) delaySlider.getValue(),
+            AlgorithmMap.getInstance().getAlgorithm(
+                algorithmComboBox.getValue()))
         );
 
         // Layout configuration

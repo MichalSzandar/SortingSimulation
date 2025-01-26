@@ -3,40 +3,43 @@ package michal.projects;
 public class MergeSort extends SortingAlgorithm {
 
     /**
-     * merges two sub arrays
+     * merges two sub arrays. (made by Geeks for geeks)
      * @param l - left bound
-     * @param m - middle 
+     * @param m - middle
      * @param r - right bound
      */
-    private void merge(int l, int m, int r)
-    {
+    private void merge(final int l, final int m, final int r) {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
         int n2 = r - m;
 
         // Create temp arrays
-        double L[] = new double[n1];
-        double R[] = new double[n2];
+        double[] L = new double[n1];
+        double[] R = new double[n2];
         // Copy data to temp arrays
-        for (int i = 0; i < n1; ++i)
-            L[i] = list.get(l+i).getHeight();
-        for (int j = 0; j < n2; ++j)
+        for (int i = 0; i < n1; ++i) {
+            L[i] = list.get(l + i).getHeight();
+        }
+        for (int j = 0; j < n2; ++j) {
             R[j] = list.get(m + 1 + j).getHeight();
+        }
 
         // Merge the temp arrays
 
         // Initial indices of first and second subarrays
-        int i = 0, j = 0;
+        int i = 0;
 
+        int j = 0;
         // Initial index of merged subarray array
         int k = l;
         while (i < n1 && j < n2) {
-            if(!isRunning) return;
+            if (!isRunning) {
+                return;
+            }
             if (L[i] <= R[j]) {
                 setVal(k, L[i]);
                 i++;
-            }
-            else {
+            } else {
                 setVal(k, R[j]);
                 j++;
             }
@@ -45,7 +48,9 @@ public class MergeSort extends SortingAlgorithm {
 
         // Copy remaining elements of L[] if any
         while (i < n1) {
-            if(!isRunning) return;
+            if (!isRunning) {
+                return;
+            }
             setVal(k, L[i]);
             i++;
             k++;
@@ -53,7 +58,9 @@ public class MergeSort extends SortingAlgorithm {
 
         // Copy remaining elements of R[] if any
         while (j < n2) {
-            if(!isRunning) return;
+            if (!isRunning) {
+                return;
+            }
             setVal(k, R[j]);
             j++;
             k++;
@@ -61,17 +68,18 @@ public class MergeSort extends SortingAlgorithm {
     }
 
     /**
-     * main sort function for merge sort algorithm
+     * main sort function for merge sort algorithm.
      * @param l - left bound
      * @param r - right bound
      */
-    private void sort(int l, int r)
-    {
-        if(!isRunning) return;
+    private void sort(final int l, final int r) {
+        if (!isRunning) {
+            return;
+        }
         if (l < r) {
 
             // Find the middle point
-            int m = (l+r) / 2;
+            int m = (l + r) / 2;
 
             // Sort first and second halves
             sort(l, m);
@@ -83,10 +91,10 @@ public class MergeSort extends SortingAlgorithm {
     }
 
     @Override
-    public void run() {
+    public final void run() {
         isRunning = true;
-        
-        sort(0, list.size()-1);
+
+        sort(0, list.size() - 1);
     }
-    
+
 }
